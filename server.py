@@ -1,13 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-@app.route("/save", methods=["POST"])
-def save_data():
-    data = request.json
-    with open("data/dados.json", "w") as f:
-        import json
-        json.dump(data, f)
-    return jsonify({"status": "ok"})
+@app.route("/")
+def home():
+    return "Servidor rodando! 🚀"
 
-app.run(host="0.0.0.0", port=5000)
+@app.route("/api")
+def api():
+    return jsonify({"msg": "API funcionando!"})
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
